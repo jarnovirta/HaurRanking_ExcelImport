@@ -36,6 +36,20 @@ public enum ClassifierStage {
 		return null;
 	}
 
+	public static ClassifierStage parseInt(int classifierNumber) {
+		String numberString = String.valueOf(classifierNumber);
+		if (numberString.length() == 1) {
+			numberString = "0" + numberString;
+		}
+		for (ClassifierStage classifier : ClassifierStage.values()) {
+			String stageString = classifier.toString();
+			if (stageString.substring(4, stageString.length()).equals(numberString)) {
+				return classifier;
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public String toString() {
 		return this.name().substring(0, 3) + "-" + this.name().substring(3);
