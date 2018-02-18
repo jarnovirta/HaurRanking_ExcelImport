@@ -1,2 +1,12 @@
-[EL Info]: 2018-02-18 12:37:56.749--ServerSession(402264886)--EclipseLink, version: Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd
-[EL Info]: connection: 2018-02-18 12:37:57.387--ServerSession(402264886)--/file:/E:/Ohjelmointi/EclipseWorkSpaces/HaurRanking/ExcelDataImport/target/classes/_fi.haur_ranking.jpa login successful
+[EL Info]: 2018-02-18 22:09:33.371--ServerSession(413293501)--EclipseLink, version: Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd
+[EL Info]: connection: 2018-02-18 22:09:46.223--ServerSession(413293501)--/file:/C:/Users/Jarno/git/HaurRanking_ExcelImport/ExcelDataImport/target/classes/_fi.haur_ranking.jpa login successful
+[EL Warning]: 2018-02-18 22:09:46.369--ServerSession(413293501)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLSyntaxErrorException: object name already exists: FK_STAGE_MATCH_ID in statement [ALTER TABLE Stage ADD CONSTRAINT FK_Stage_MATCH_ID FOREIGN KEY (MATCH_ID) REFERENCES Match (ID)]
+Error Code: -5504
+Call: ALTER TABLE Stage ADD CONSTRAINT FK_Stage_MATCH_ID FOREIGN KEY (MATCH_ID) REFERENCES Match (ID)
+Query: DataModifyQuery(sql="ALTER TABLE Stage ADD CONSTRAINT FK_Stage_MATCH_ID FOREIGN KEY (MATCH_ID) REFERENCES Match (ID)")
+[EL Warning]: 2018-02-18 22:09:46.371--ServerSession(413293501)--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLSyntaxErrorException: object name already exists: FK_STAGESCORESHEET_COMPETITOR_ID in statement [ALTER TABLE StageScoreSheet ADD CONSTRAINT FK_StageScoreSheet_COMPETITOR_ID FOREIGN KEY (COMPETITOR_ID) REFERENCES Competitor (ID)]
+Error Code: -5504
+Call: ALTER TABLE StageScoreSheet ADD CONSTRAINT FK_StageScoreSheet_COMPETITOR_ID FOREIGN KEY (COMPETITOR_ID) REFERENCES Competitor (ID)
+Query: DataModifyQuery(sql="ALTER TABLE StageScoreSheet ADD CONSTRAINT FK_StageScoreSheet_COMPETITOR_ID FOREIGN KEY (COMPETITOR_ID) REFERENCES Competitor (ID)")

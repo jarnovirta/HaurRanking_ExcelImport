@@ -21,6 +21,8 @@ import excel_data_import.domain.IPSCDivision;
 import excel_data_import.domain.Match;
 import excel_data_import.domain.Stage;
 import excel_data_import.domain.StageScoreSheet;
+import excel_data_import.service.CompetitorService;
+import excel_data_import.service.MatchService;
 
 public class ExcelFileService {
 	public static void importExcelData(String fileName) {
@@ -40,9 +42,6 @@ public class ExcelFileService {
 				Iterator<Cell> cellIterator = sheet.getRow(0).iterator();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-				Calendar matchDatesEnd = Calendar.getInstance();
-				matchDatesEnd.setTime(dateFormat.parse("31.12.2014"));
-
 				while (cellIterator.hasNext()) {
 					Cell currentCell = cellIterator.next();
 					if (currentCell.getCellTypeEnum() == CellType.NUMERIC) {
@@ -53,11 +52,6 @@ public class ExcelFileService {
 
 						String matchAndStageName = classifierStage + " imported from Excel on " + importDateString;
 						Match match = new Match(matchAndStageName);
-
-						Calendar matchDate = Calendar.getInstance();
-						matchDate.setTime(matchDatesEnd.getTime());
-						match.setDate(matchDate);
-						matchDatesEnd.add(Calendar.DATE, -1);
 
 						List<Stage> stageList = new ArrayList<Stage>();
 
@@ -91,6 +85,14 @@ public class ExcelFileService {
 						competitor = new Competitor();
 						competitor.setFirstName(nameArray[0]);
 						competitor.setLastName(nameArray[1]);
+						Competitor databaseCompetitor = CompetitorService.find(competitor.getFirstName(),
+								competitor.getLastName());
+						if (databaseCompetitor != null) {
+							competitor = databaseCompetitor;
+
+						} else {
+							CompetitorService.persist(competitor);
+						}
 					} else
 						throw new Exception("Wrong competitor name format in Excel spreadsheet");
 
@@ -110,11 +112,27 @@ public class ExcelFileService {
 							Stage stage = matches.get(currentCell.getColumnIndex() - 1).getStages().get(0);
 							StageScoreSheet scoreSheet = new StageScoreSheet(competitor, hitFactor, stage, division);
 							stage.getStageScoreSheets().add(scoreSheet);
+
 						}
 
 					}
 				}
+
+				// Set match dates to before start of WinMSS database on
+				// 5.3.2011
+				Calendar nextMatchDate = Calendar.getInstance();
+				nextMatchDate.setTime(dateFormat.parse("5.3.2011"));
+				nextMatchDate.add(Calendar.DATE, -(matches.size()));
+
 				for (Match match : matches) {
+
+					Calendar matchDate = Calendar.getInstance();
+					matchDate.setTime(nextMatchDate.getTime());
+					match.setDate(matchDate);
+					nextMatchDate.add(Calendar.DATE, 1);
+
+					MatchService.persist(match);
+
 					System.out.println("\n\tMatch name: " + match.getName() + " / Saved with match date: "
 							+ match.getDate().getTime().toString());
 					Stage stage = match.getStages().get(0);
@@ -127,6 +145,7 @@ public class ExcelFileService {
 					System.out.println("\n\t=================");
 				}
 			}
+
 			workbook.close();
 
 		} catch (Exception e) {

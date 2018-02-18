@@ -9,9 +9,11 @@ public class MatchRepositoryImpl implements MatchRepository {
 
 	@Override
 	public void persist(Match match) {
-		EntityManager entityManager = HaurRankingDatabaseUtils.createEntityManager();
-		entityManager.getTransaction().begin();
+
 		try {
+			EntityManager entityManager = HaurRankingDatabaseUtils.createEntityManager();
+			entityManager.getTransaction().begin();
+
 			entityManager.persist(match);
 			entityManager.getTransaction().commit();
 
@@ -19,8 +21,5 @@ public class MatchRepositoryImpl implements MatchRepository {
 			e.printStackTrace();
 
 		}
-		entityManager.close();
-
 	}
-
 }

@@ -16,7 +16,7 @@
 			<property name="javax.persistence.jdbc.password" value="" />
 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />
-			<property name="eclipselink.logging.file" value="output.log"/>
+			<!-- <property name="eclipselink.logging.file" value="output.log"/> -->
 			<property name="PERSISTENCE_UNIT_NAME" value="fi.haur_ranking.jpa"/>
 		</properties>
 	</persistence-unit>

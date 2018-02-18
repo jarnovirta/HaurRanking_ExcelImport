@@ -17,7 +17,7 @@ public class StageScoreSheet {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	private Competitor competitor;
 	private String ssiModel = "match_ipsc.ipscscorecard";
 	private Long winMssPrimaryKey;
