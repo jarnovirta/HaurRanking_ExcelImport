@@ -5,6 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>excelimport</name>
   <build>
+  	<finalName>excel-import</finalName>
     <sourceDirectory>src/main/java</sourceDirectory>
     <plugins>
       <plugin>
