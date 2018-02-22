@@ -1,6 +1,5 @@
 package excel_data_import.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "StageScoreSheet")
@@ -17,11 +17,13 @@ public class StageScoreSheet {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	private Competitor competitor;
-	private String ssiModel = "match_ipsc.ipscscorecard";
+	@Transient
 	private Long winMssPrimaryKey;
+	@Transient
 	private Long winMssStageId;
+	@Transient
 	private Long winMssMemberId;
 
 	@ManyToOne
@@ -35,18 +37,17 @@ public class StageScoreSheet {
 	private int deductedPoints = 0;
 	private int specialPenalty;
 	private double time;
-	private String timeString;
 	private boolean failedPowerFactor = false;
 	private boolean disqualified = false;
 	private double hitFactor;
 	@Enumerated(EnumType.STRING)
 	private IPSCDivision ipscDivision;
 
+	@Transient
 	private String lastModifiedInWinMSSDatabaseString;
 
 	private int procedurals;
 	boolean scoresZeroedForStage = false;
-	private String comment = "";
 
 	public StageScoreSheet() {
 	}
@@ -68,10 +69,6 @@ public class StageScoreSheet {
 
 	public int getcHits() {
 		return cHits;
-	}
-
-	public String getComment() {
-		return comment;
 	}
 
 	public Competitor getCompetitor() {
@@ -118,20 +115,12 @@ public class StageScoreSheet {
 		return specialPenalty;
 	}
 
-	public String getSsiModel() {
-		return ssiModel;
-	}
-
 	public Stage getStage() {
 		return stage;
 	}
 
 	public double getTime() {
 		return time;
-	}
-
-	public String getTimeString() {
-		return timeString;
 	}
 
 	public Long getWinMssMemberId() {
@@ -168,10 +157,6 @@ public class StageScoreSheet {
 
 	public void setcHits(int cHits) {
 		this.cHits = cHits;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
 	}
 
 	public void setCompetitor(Competitor competitor) {
@@ -230,20 +215,12 @@ public class StageScoreSheet {
 		this.specialPenalty = specialPenalty;
 	}
 
-	public void setSsiModel(String ssiModel) {
-		this.ssiModel = ssiModel;
-	}
-
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
 
 	public void setTime(double time) {
 		this.time = time;
-	}
-
-	public void setTimeString(String timeString) {
-		this.timeString = timeString;
 	}
 
 	public void setWinMssMemberId(Long winMssMemberId) {
