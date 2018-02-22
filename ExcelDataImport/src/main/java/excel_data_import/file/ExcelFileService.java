@@ -28,7 +28,7 @@ public class ExcelFileService {
 	public static void importExcelData(String fileName) {
 		Workbook workbook = null;
 		try {
-			FileInputStream excelFile = new FileInputStream(new File("ranking_data.xlsx"));
+			FileInputStream excelFile = new FileInputStream(new File(fileName));
 			workbook = new XSSFWorkbook(excelFile);
 
 			for (int i = 0; i < workbook.getNumberOfSheets(); i++) {

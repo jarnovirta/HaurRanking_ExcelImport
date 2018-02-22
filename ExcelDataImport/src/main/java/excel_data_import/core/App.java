@@ -13,7 +13,7 @@ public class App {
 		HaurRankingDatabaseUtils.initialize();
 		MatchService.init(new MatchRepositoryImpl());
 
-		ExcelFileService.importExcelData("Lohi file");
+		ExcelFileService.importExcelData(args[0]);
 		HaurRankingDatabaseUtils.createEntityManager().close();
 		HaurRankingDatabaseUtils.closeEntityManagerFactory();
 	}
