@@ -120,9 +120,9 @@ public class ExcelFileService {
 				}
 
 				// Set match dates to before start of WinMSS database on
-				// 5.3.2011
+				// 28.2.2017
 				Calendar nextMatchDate = Calendar.getInstance();
-				nextMatchDate.setTime(dateFormat.parse("5.3.2011"));
+				nextMatchDate.setTime(dateFormat.parse("28.2.2017"));
 				nextMatchDate.add(Calendar.DATE, -(matches.size()));
 
 				for (Match match : matches) {
