@@ -32,12 +32,9 @@ public class StageScoreSheet {
 	private int bHits;
 	private int cHits;
 	private int dHits;
-	private int misses = 0;
-	private int penalties = 0;
-	private int deductedPoints = 0;
-	private int specialPenalty;
+	private int misses = -1;
+	private int penalties = -1;
 	private double time;
-	private boolean failedPowerFactor = false;
 	private boolean disqualified = false;
 	private double hitFactor;
 	@Enumerated(EnumType.STRING)
@@ -75,10 +72,6 @@ public class StageScoreSheet {
 		return competitor;
 	}
 
-	public int getDeductedPoints() {
-		return deductedPoints;
-	}
-
 	public int getdHits() {
 		return dHits;
 	}
@@ -111,10 +104,6 @@ public class StageScoreSheet {
 		return procedurals;
 	}
 
-	public int getSpecialPenalty() {
-		return specialPenalty;
-	}
-
 	public Stage getStage() {
 		return stage;
 	}
@@ -139,44 +128,32 @@ public class StageScoreSheet {
 		return disqualified;
 	}
 
-	public boolean isFailedPowerFactor() {
-		return failedPowerFactor;
-	}
-
 	public boolean isScoresZeroedForStage() {
 		return scoresZeroedForStage;
 	}
 
 	public void setaHits(int aHits) {
-		this.aHits = aHits;
+		this.aHits = -1;
 	}
 
 	public void setbHits(int bHits) {
-		this.bHits = bHits;
+		this.bHits = -1;
 	}
 
 	public void setcHits(int cHits) {
-		this.cHits = cHits;
+		this.cHits = -1;
 	}
 
 	public void setCompetitor(Competitor competitor) {
 		this.competitor = competitor;
 	}
 
-	public void setDeductedPoints(int deductedPoints) {
-		this.deductedPoints = deductedPoints;
-	}
-
 	public void setdHits(int dHits) {
-		this.dHits = dHits;
+		this.dHits = -1;
 	}
 
 	public void setDisqualified(boolean disqualified) {
 		this.disqualified = disqualified;
-	}
-
-	public void setFailedPowerFactor(boolean failedPowerFactor) {
-		this.failedPowerFactor = failedPowerFactor;
 	}
 
 	public void setHitFactor(double hitFactor) {
@@ -209,10 +186,6 @@ public class StageScoreSheet {
 
 	public void setScoresZeroedForStage(boolean scoresZeroedForStage) {
 		this.scoresZeroedForStage = scoresZeroedForStage;
-	}
-
-	public void setSpecialPenalty(int specialPenalty) {
-		this.specialPenalty = specialPenalty;
 	}
 
 	public void setStage(Stage stage) {
